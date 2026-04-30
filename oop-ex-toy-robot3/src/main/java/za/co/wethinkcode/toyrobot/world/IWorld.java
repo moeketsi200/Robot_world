@@ -23,7 +23,7 @@ public interface IWorld {
         FAILED_OUTSIDE_WORLD, //robot will go outside world limits if allowed, so it failed to update the position
         FAILED_OBSTRUCTED, //robot obstructed by at least one obstacle
         FAILED_MOUNTAIN, //robot obstructed by a mountain
-        FAILED_LAKE, //robot obstructed by a lake
+        FELL_IN_PIT //robot fell into a pit
     }
 
     Position CENTRE = new Position(0,0);

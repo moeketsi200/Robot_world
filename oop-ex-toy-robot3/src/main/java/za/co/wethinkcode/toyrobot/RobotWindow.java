@@ -11,8 +11,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import za.co.wethinkcode.toyrobot.world.IWorld;
 import za.co.wethinkcode.toyrobot.world.Obstacle;
-import za.co.wethinkcode.toyrobot.world.Lake;
 import za.co.wethinkcode.toyrobot.world.Mountain;
+import za.co.wethinkcode.toyrobot.world.Pit;
 
 import java.util.List;
 
@@ -55,14 +55,13 @@ public class RobotWindow extends Application {
                 int x = obs.getBottomLeftX() + 200;
                 int y = 200 - (obs.getBottomLeftY() + size); // JavaFX Y-axis goes downwards
                 
-                if (obs instanceof Lake) {
-                    double radius = size / 2.0;
-                    Circle circle = new Circle(x + radius, y + radius, radius);
-                    circle.setFill(Color.BLUE); // Lakes are circular and blue
-                    root.getChildren().add(circle);
-                } else if (obs instanceof Mountain) {
+                if (obs instanceof Mountain) {
                     Rectangle rect = new Rectangle(x, y, size, size);
                     rect.setFill(Color.DARKGRAY); // Mountains are grey
+                    root.getChildren().add(rect);
+                } else if (obs instanceof Pit) {
+                    Rectangle rect = new Rectangle(x, y, size, size);
+                    rect.setFill(Color.BLACK); // Pits are black
                     root.getChildren().add(rect);
                 } else {
                     Rectangle rect = new Rectangle(x, y, size, size);

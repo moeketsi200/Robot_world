@@ -24,14 +24,31 @@ public class Lake implements Obstacle {
 
     @Override
     public boolean blocksPosition(Position position) {
-        return position.getX() >= x && position.getX() <= x + size &&
-               position.getY() >= y && position.getY() <= y + size;
+        int pX = position.getX();
+        int pY = position.getY();
+        return pX >= this.x && pX < (this.x + this.size) &&
+               pY >= this.y && pY < (this.y + this.size);
     }
 
     @Override
     public boolean blocksPath(Position a, Position b) {
-        // Simple check: if it blocks the destination
-        // (A fully robust check would verify the entire line between a and b)
-        return blocksPosition(b);
+        if (a.getX() == b.getX()) { // Vertical movement
+            int startY = Math.min(a.getY(), b.getY());
+            int endY = Math.max(a.getY(), b.getY());
+            for (int currentY = startY; currentY <= endY; currentY++) {
+                if (blocksPosition(new Position(a.getX(), currentY))) {
+                    return true;
+                }
+            }
+        } else if (a.getY() == b.getY()) { // Horizontal movement
+            int startX = Math.min(a.getX(), b.getX());
+            int endX = Math.max(a.getX(), b.getX());
+            for (int currentX = startX; currentX <= endX; currentX++) {
+                if (blocksPosition(new Position(currentX, a.getY()))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

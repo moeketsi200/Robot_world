@@ -11,6 +11,7 @@ public class GUIWorld extends AbstractWorld {
 
     @Override
     public void showObstacles() {
+        super.showObstacles();
         System.out.println("GUI Mode active! Launching window...");
         RobotWindow.setObstacles(getObstacles());
         new Thread(() -> javafx.application.Application.launch(RobotWindow.class)).start();

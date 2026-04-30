@@ -14,8 +14,9 @@ public class ForwardCommand extends Command {
             target.setStatus("Sorry, there is an obstacle in the way.");
         } else if (response == IWorld.UpdateResponse.FAILED_MOUNTAIN) {
             target.setStatus("Sorry, there is a mountain in the way.");
-        } else if (response == IWorld.UpdateResponse.FAILED_LAKE) {
-            target.setStatus("Sorry, there is a lake in the way.");
+        } else if (response == IWorld.UpdateResponse.FELL_IN_PIT) {
+            target.setStatus("Fell into a pit and died.");
+            return false;
         } else {
             target.setStatus("Sorry, I cannot go outside my safe zone.");
         }

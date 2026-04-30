@@ -47,8 +47,8 @@ public abstract class AbstractWorld implements IWorld {
                 if (obs.blocksPath(this.position, finalPosition)) {
                     if (obs instanceof za.co.wethinkcode.toyrobot.world.Mountain) {
                         return UpdateResponse.FAILED_MOUNTAIN;
-                    } else if (obs instanceof za.co.wethinkcode.toyrobot.world.Lake) {
-                        return UpdateResponse.FAILED_LAKE;
+                    } else if (obs instanceof za.co.wethinkcode.toyrobot.world.Pit) {
+                        return UpdateResponse.FELL_IN_PIT;
                     }
                 }
             }
@@ -103,6 +103,15 @@ public abstract class AbstractWorld implements IWorld {
 
     @Override
     public void showObstacles() {
-        // To be implemented by specific worlds like TextWorld
+        if (getObstacles().isEmpty()) return;
+        
+        System.out.println("There are some obstacles:");
+        for (Obstacle obs : getObstacles()) {
+            int x1 = obs.getBottomLeftX();
+            int y1 = obs.getBottomLeftY();
+            int size = obs.getSize() - 1; // Calculate the opposite boundary
+            String type = obs.getClass().getSimpleName(); // Gets 'Mountain', 'SquareObstacle', etc.
+            System.out.println("- " + type + " at position " + x1 + "," + y1 + " (to " + (x1 + size) + "," + (y1 + size) + ")");
+        }
     }
 }
